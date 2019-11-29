@@ -10,6 +10,7 @@
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
+    "start:serverless": "sls offline start",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "tslint -p tsconfig.json -c tslint.json",
@@ -18,21 +19,22 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "deploy:pre": "rimraf deploy/* && zip -rqq deploy/nest-lambda.zip dist/ node_modules",
-    "deploy:bucket": "aws s3api put-bucket-lifecycle --bucket nestjs-lambda-test-bucket --lifecycle-configuration '{\"Rules\":[{\"Expiration\":{\"Days\":1}, \"AbortIncompleteMultipartUpload\":{\"DaysAfterInitiation\":1},\"Status\":\"Enabled\",\"ID\":\"Delete1DayOld\",\"Prefix\":\"\"}]}' --profile $PROFILE",
-    "deploy:upload": "aws cloudformation package --template-file lambda.yml --s3-bucket nestjs-lambda-test-bucket --output-template-file deploy/nest-lambda.out.yml --profile $PROFILE && aws s3 cp deploy/nest-lambda.zip s3://nestjs-lambda-test-bucket --profile $PROFILE",
-    "deploy:execute": "aws cloudformation deploy --template-file deploy/nest-lambda.out.yml --stack-name nest-lambda --capabilities CAPABILITY_IAM --region eu-west-1 --profile $PROFILE",
-    "deploy": "yarn deploy:pre && yarn deploy:upload && yarn deploy:execute"
+    "deploy": "sls deploy --aws-profile $PROFILE",
+    "deploy:prod": "sls deploy --stage prod --aws-profile $PROFILE",
+    "develop": "yarn npm-run-all -p start:dev && start:serverless"
   },
   "dependencies": {
+    "@hewmen/serverless-plugin-typescript": "^1.1.17",
     "@nestjs/common": "^6.7.2",
     "@nestjs/core": "^6.7.2",
     "@nestjs/platform-express": "^6.7.2",
     "aws-lambda": "^0.1.2",
     "aws-serverless-express": "^3.3.6",
+    "npm-run-all": "^4.1.5",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.0",
-    "rxjs": "^6.5.3"
+    "rxjs": "^6.5.3",
+    "serverless": "^1.58.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^6.9.0",
@@ -46,6 +48,9 @@
     "@types/supertest": "^2.0.8",
     "jest": "^24.9.0",
     "prettier": "^1.18.2",
+    "serverless-offline": "^5.12.0",
+    "serverless-plugin-optimize": "^4.1.1-rc.1",
+    "serverless-plugin-warmup": "^4.7.1-rc.1",
     "supertest": "^4.0.2",
     "ts-jest": "^24.1.0",
     "ts-loader": "^6.1.1",

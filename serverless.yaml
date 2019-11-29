@@ -1,0 +1,35 @@
+provider:
+  name: aws
+  region: eu-west-2
+  runtime: nodejs10.x
+  memorySize: 128
+  stage: dev
+
+service:
+  name: nest-serverless
+
+plugins:
+  - '@hewmen/serverless-plugin-typescript'
+  - serverless-plugin-optimize
+  - serverless-offline
+  - serverless-plugin-warmup # https://www.npmjs.com/package/serverless-plugin-warmup
+
+functions:
+  main: # The name of the lambda function
+    # The module 'handler' is exported in the file 'src/lambda'
+    handler: src/lambda.handler
+    events:
+      - http:
+          method: any
+          path: /{any+}
+
+package:
+  individually: true
+  # Include also .env file
+  include:
+    - .env
+
+custom:
+  warmup: # Prevent cold start on all functions (only for production and staging)
+    enabled: false # true to enable
+    folderName: '_warmup' # Name of the folder created for the generated warmup

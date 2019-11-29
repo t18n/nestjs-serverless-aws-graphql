@@ -10,13 +10,7 @@ AWS account with IAM Group policy setup including:
 - API Gateway
   Give all policy above full permission for the sake of simplicity. Keep in mind that you can always tighten the permission group for each user.
 
-## Getting started
+## Deploy
 
-Run script below to instantly deploy this to your Lambda
-
-```bash
-git clone <nest-js-aws-lambda-repo>
-yarn install
-PROFILE=<your-aws-profile> yarn deploy:bucket
-PROFILE=<your-aws-profile> yarn deploy
-```
+- To deploy/update dev stack: `PROFILE=<aws-profile> yarn deploy`
+- To deploy/update prod stack: `PROFILE=<aws-profile> yarn deploy:prod`
