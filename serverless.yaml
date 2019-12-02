@@ -23,12 +23,6 @@ functions:
           method: any
           path: /{any+}
 
-package:
-  individually: true
-  # Include also .env file
-  include:
-    - .env
-
 custom:
   warmup: # Prevent cold start on all functions (only for production and staging)
     enabled: false # true to enable

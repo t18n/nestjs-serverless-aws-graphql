@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
+import { MessagesModule } from './messages/messages.module';
 import { join } from 'path';
 
 @Module({
@@ -8,14 +9,14 @@ import { join } from 'path';
       debug: false,
       playground: true,
       definitions: {
-        path: join(process.cwd(), '/src/graphql.schema.d.ts'),
+        path: join(process.cwd(), '/src/schemas/graphql.schema.d.ts'),
       },
       typePaths: ['./**/*.graphql'],
       resolverValidationOptions: {
         requireResolversForResolveType: false,
       },
-      context: ({ req }) => ({ req }),
     }),
+    MessagesModule,
   ],
   controllers: [],
   providers: [],
