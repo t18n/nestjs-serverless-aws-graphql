@@ -15,6 +15,10 @@ import { join } from 'path';
       resolverValidationOptions: {
         requireResolversForResolveType: false,
       },
+      tracing: true,
+      engine: {
+        apiKey: process.env.APOLLO_ENGINE_API_KEY,
+      },
     }),
     MessagesModule,
   ],

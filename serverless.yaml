@@ -9,10 +9,9 @@ service:
   name: nest-serverless
 
 plugins:
-  - '@hewmen/serverless-plugin-typescript'
-  - serverless-plugin-optimize
+  - serverless-plugin-typescript
+  # - serverless-plugin-optimize
   - serverless-offline
-  - serverless-plugin-warmup # https://www.npmjs.com/package/serverless-plugin-warmup
 
 functions:
   main: # The name of the lambda function
@@ -23,7 +22,5 @@ functions:
           method: any
           path: /{any+}
 
-custom:
-  warmup: # Prevent cold start on all functions (only for production and staging)
-    enabled: false # true to enable
-    folderName: '_warmup' # Name of the folder created for the generated warmup
+package:
+  individually: true # Set your packages to be built individually to have smaller packages

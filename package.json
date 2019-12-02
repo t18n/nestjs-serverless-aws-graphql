@@ -1,9 +1,13 @@
 {
   "name": "nest-js-aws-lambda",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "A GraphQL API made with NestJS and Serverless Framework for AWS Lambda",
   "license": "MIT",
+  "author": {
+    "name": "Turbo Thinh",
+    "email": "turbothinh@gmail.com",
+    "url": "https://turbothinh.com"
+  },
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
@@ -24,7 +28,6 @@
     "dev": "yarn npm-run-all -p start:dev && start:serverless"
   },
   "dependencies": {
-    "@hewmen/serverless-plugin-typescript": "^1.1.17",
     "@nestjs/common": "^6.7.2",
     "@nestjs/core": "^6.7.2",
     "@nestjs/graphql": "^6.5.3",
@@ -54,6 +57,7 @@
     "prettier": "^1.18.2",
     "serverless-offline": "^5.12.0",
     "serverless-plugin-optimize": "^4.1.1-rc.1",
+    "serverless-plugin-typescript": "^1.1.9",
     "serverless-plugin-warmup": "^4.7.1-rc.1",
     "supertest": "^4.0.2",
     "ts-jest": "^24.1.0",
@@ -61,7 +65,7 @@
     "ts-node": "^8.4.1",
     "tsconfig-paths": "^3.9.0",
     "tslint": "^5.20.0",
-    "typescript": "^3.6.3"
+    "typescript": "^3.7.2"
   },
   "jest": {
     "moduleFileExtensions": [
