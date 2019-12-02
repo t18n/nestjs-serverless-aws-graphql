@@ -1,11 +1,23 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { BooksController } from './books.controller';
+import { GraphQLModule } from '@nestjs/graphql';
+import { join } from 'path';
 
 @Module({
-  imports: [],
-  controllers: [AppController, BooksController],
-  providers: [AppService],
+  imports: [
+    GraphQLModule.forRoot({
+      debug: false,
+      playground: true,
+      definitions: {
+        path: join(process.cwd(), '/src/graphql.schema.d.ts'),
+      },
+      typePaths: ['./**/*.graphql'],
+      resolverValidationOptions: {
+        requireResolversForResolveType: false,
+      },
+      context: ({ req }) => ({ req }),
+    }),
+  ],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

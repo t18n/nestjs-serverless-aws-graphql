@@ -21,15 +21,19 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "deploy": "sls deploy --aws-profile $PROFILE",
     "deploy:prod": "sls deploy --stage prod --aws-profile $PROFILE",
-    "develop": "yarn npm-run-all -p start:dev && start:serverless"
+    "dev": "yarn npm-run-all -p start:dev && start:serverless"
   },
   "dependencies": {
     "@hewmen/serverless-plugin-typescript": "^1.1.17",
     "@nestjs/common": "^6.7.2",
     "@nestjs/core": "^6.7.2",
+    "@nestjs/graphql": "^6.5.3",
     "@nestjs/platform-express": "^6.7.2",
+    "apollo-server-express": "^2.9.12",
     "aws-lambda": "^0.1.2",
     "aws-serverless-express": "^3.3.6",
+    "graphql": "^14.5.8",
+    "graphql-tools": "^4.0.6",
     "npm-run-all": "^4.1.5",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.0",
